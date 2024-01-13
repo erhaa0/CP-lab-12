@@ -1,1 +1,71 @@
+#include <iostream>
+#include <utility>
+
+using namespace std;
+void palindrome_pairs(const string words[], int length);
+bool is_palindrome(const string& word);
+
+
+bool is_palindrome(const string& word) {
+    int start = 0;
+    int end = word.length() - 1;
+
+    while (start < end) {
+        if (word[start] != word[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+
+    return true;
+}
+
+void palindrome_pairs(const string words[], int length) {
+    cout << "Palindrome pairs:" << endl;
+
+    for (int i = 0; i < length; ++i) {
+        for (int j = i + 1; j < length; ++j) {
+            const string& word1 = words[i];
+            const string& word2 = words[j];
+
+            if (is_palindrome(word1 + word2)) {
+                cout << "(" << word1 << ", " << word2 << ")" << endl;
+            }
+
+            if (is_palindrome(word2 + word1)) {
+                cout << "(" << word2 << ", " << word1 << ")" << endl;
+            }
+        }
+    }
+}
+
+int main() {
+    // Example usage
+    const int maxLength = 100;
+    const int maxWords = 1000;
+
+    int length;
+    cout << "Enter the number of words (max 1000): ";
+    cin >> length;
+
+    if (length <= 0 || length > maxWords) {
+        cout << "Invalid input. Exiting." << endl;
+        return 1; // Exit with an error code
+    }
+
+    string words[maxWords];
+    cout << "Enter the words (max length 100): ";
+    for (int i = 0; i < length; ++i) {
+        cin >> words[i];
+        if (words[i].length() > maxLength) {
+            cout << "Invalid input. Exiting." << endl;
+            return 1; // Exit with an error code
+        }
+    }
+
+    palindrome_pairs(words, length);
+
+    return 0;
+}
 
