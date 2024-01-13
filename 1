@@ -1,1 +1,28 @@
 
+#include <iostream>
+using namespace std;
+
+int count_evens(int numbers[], int length) {
+    int count = 0;
+
+    for (int i = 0; i < length; ++i) {
+        if (numbers[i] % 2 == 0) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    const int length=100;
+    int numbers[length];
+    cout << "enter Numbers for array: ";
+    for (int i = 0; i <= length; i++)
+    {
+        cin >> numbers[i];
+    }
+
+    int result = count_evens(numbers,length);
+    cout << "Number of even numbers: " << result << endl;
+    return 0;
